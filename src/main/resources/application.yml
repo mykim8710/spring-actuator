@@ -1,0 +1,31 @@
+management:
+#  endpoint:
+#    shutdown:
+#      enabled: true
+#  endpoints:
+#    jmx:
+#      exposure:
+#        include: "health,info"
+
+  endpoint:
+    health:
+      show-components: always
+
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans" ## ?? ?????? ??
+
+  info:
+    java:
+      enabled: true
+    os:
+      enabled: true
+    env:
+      enabled: true
+
+info:
+  app:
+    name: hello-actuator
+    company: mykim
