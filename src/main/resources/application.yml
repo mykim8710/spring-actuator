@@ -15,9 +15,11 @@ management:
     web:
       exposure:
         include: "*"
-        exclude: "env,beans" ## ?? ?????? ??
+        exclude: "env,beans"  ## 해당 엔드포인트 제외
+      ##base-path: "/manage"
 
   info:
+    ## java, os, env info
     java:
       enabled: true
     os:
@@ -25,7 +27,23 @@ management:
     env:
       enabled: true
 
+    ## git info
+    git:
+      mode: "full"
+
+#  server:
+#    port: 9292
+
 info:
   app:
     name: hello-actuator
     company: mykim
+
+logging:
+  level:
+    hello.controller: debug
+
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true
