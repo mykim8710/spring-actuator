@@ -1,7 +1,11 @@
 #!/bin/bash
 
+cd ../
+
 # 현재 브랜치가 main인지 확인
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+echo "CURRENT_BRANCH >> CURRENT_BRANCH"
+
 if [[ "$CURRENT_BRANCH" != "main" ]]; then
   echo "[ERROR] This script must be run on the 'main' branch"
   exit 1
@@ -9,7 +13,7 @@ fi
 
 # Merge commit 메시지에서 머지된 브랜치 이름 추출
 MERGED_BRANCH_NAME=$(git log -1 --pretty=%B | grep "from" | awk '{print $NF}')
-
+echo "MERGED_BRANCH_NAME >> MERGED_BRANCH_NAME"
 if [[ -z "$MERGED_BRANCH_NAME" ]]; then
   echo "[ERROR] Could not detect merged branch name."
   exit 1
@@ -17,6 +21,7 @@ fi
 
 # 브랜치명에서 MODULE_NAME 추출 (release/admin-1.0.0 -> admin)
 MODULE_NAME=$(echo $MERGED_BRANCH_NAME | awk -F'/' '{print $2}' | awk -F'-' '{print $1}')
+echo "MODULE_NAME >> MODULE_NAME"
 if [[ -z "$MODULE_NAME" ]]; then
   echo "[ERROR] Could not detect MODULE_NAME from merged branch: $MERGED_BRANCH_NAME"
   exit 1
